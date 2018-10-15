@@ -37,6 +37,7 @@ class ToDoListController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        items = ToDoItem.all()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -54,11 +55,13 @@ class ToDoListController: UITableViewController {
     @IBAction func addItem() {
         
     }
+    
 }
 
 // MARK: - Table View Data Source
 
 extension ToDoListController {
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return items?.count ?? 0
     }
@@ -75,18 +78,20 @@ extension ToDoListController {
         
         return cell
     }
+    
 }
 
 // MARK: - Table View Delegate
 
 extension ToDoListController {
+    
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
     }
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        guard let item = items?[indexPath.row],
-            editingStyle == .delete else { return }
+        guard let item = items?[indexPath.row], editingStyle == .delete else { return }
         
     }
+    
 }
