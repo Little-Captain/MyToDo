@@ -31,6 +31,7 @@ import RealmSwift
 
 class ToDoListController: UITableViewController {
     
+    private var itemsToken: NotificationToken?
     private var items: Results<ToDoItem>?
     
     // MARK: - ViewController life-cycle
@@ -42,18 +43,30 @@ class ToDoListController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+        // 在创建订阅的同一线程上调用回调!
+        itemsToken = items?.observe { [weak tableView] changes in
+            guard let tableView = tableView else { return }
+            switch changes {
+            case .initial:
+                tableView.reloadData()
+            case .update(_, let deletions, let insertions, let updates):
+                tableView.applyChanges(deletions: deletions, insertions: insertions, updates: updates)
+            case .error:
+                break
+            }
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        
+        // 使 itemsToken 无效化, 并取消数据的观察
+        itemsToken?.invalidate()
     }
     
     // MARK: - Actions
     
     @IBAction func addItem() {
-        
+        userInputAlert("Add Todo Item") { ToDoItem.add(text: $0) }
     }
     
 }
