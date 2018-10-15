@@ -31,15 +31,15 @@ import RealmSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-  var window: UIWindow?
-
-  func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-    SyncManager.shared.logLevel = .off
-
-    return true
-  }
-
-  private func initializeRealm() {
+    var window: UIWindow?
     
-  }
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        SyncManager.shared.logLevel = .off
+        
+        return true
+    }
+    
+    private func initializeRealm() {
+        
+    }
 }

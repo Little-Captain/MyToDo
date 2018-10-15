@@ -30,27 +30,26 @@ import Foundation
 import RealmSwift
 
 @objcMembers class ToDoItem: Object {
-  enum Property: String {
-    case id, text, isCompleted
-  }
-
-  dynamic var id = UUID().uuidString
-  dynamic var text = ""
-  dynamic var isCompleted = false
-
-  override static func primaryKey() -> String? {
-    return ToDoItem.Property.id.rawValue
-  }
-
-  convenience init(_ text: String) {
-    self.init()
-    self.text = text
-  }
+    enum Property: String {
+        case id, text, isCompleted
+    }
+    
+    dynamic var id = UUID().uuidString
+    dynamic var text = ""
+    dynamic var isCompleted = false
+    
+    override static func primaryKey() -> String? {
+        return ToDoItem.Property.id.rawValue
+    }
+    
+    convenience init(_ text: String) {
+        self.init()
+        self.text = text
+    }
 }
 
 // MARK: - CRUD methods
 
 extension ToDoItem {
-
-
+    
 }
