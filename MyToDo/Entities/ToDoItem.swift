@@ -81,4 +81,11 @@ extension ToDoItem {
         }
     }
     
+    func update(text: String) {
+        guard let realm = realm else { return }
+        try! realm.write {
+            self.text = text
+        }
+    }
+    
 }

@@ -106,8 +106,14 @@ extension ToDoListController {
 
 extension ToDoListController {
     
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let item = items?[indexPath.row] else { return }
+        userInputAlert("Edit Todo Item") { item.update(text: $0) }
+    }
+    
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        return true
+        guard let item = items?[indexPath.row] else { return false }
+        return item.isCompleted
     }
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
