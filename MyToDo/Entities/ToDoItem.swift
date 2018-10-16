@@ -74,4 +74,11 @@ extension ToDoItem {
         }
     }
     
+    func delete() {
+        guard let realm = realm else { return }
+        try! realm.write {
+            realm.delete(self)
+        }
+    }
+    
 }

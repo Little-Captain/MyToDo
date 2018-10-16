@@ -73,6 +73,10 @@ class ToDoListController: UITableViewController {
         item.toggleCompleted()
     }
     
+    func deleteItem(_ item: ToDoItem) {
+        item.delete()
+    }
+    
 }
 
 // MARK: - Table View Data Source
@@ -108,7 +112,7 @@ extension ToDoListController {
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         guard let item = items?[indexPath.row], editingStyle == .delete else { return }
-        
+        deleteItem(item)
     }
     
 }
