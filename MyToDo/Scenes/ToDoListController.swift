@@ -69,6 +69,10 @@ class ToDoListController: UITableViewController {
         userInputAlert("Add Todo Item") { ToDoItem.add(text: $0) }
     }
     
+    func toggleItem(_ item: ToDoItem) {
+        item.toggleCompleted()
+    }
+    
 }
 
 // MARK: - Table View Data Source
@@ -86,7 +90,7 @@ extension ToDoListController {
         }
         
         cell.configureWith(item) { [weak self] item in
-            
+            self?.toggleItem(item)
         }
         
         return cell

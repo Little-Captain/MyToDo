@@ -67,4 +67,11 @@ extension ToDoItem {
         return item
     }
     
+    func toggleCompleted() {
+        guard let realm = realm else { return }
+        try! realm.write {
+            isCompleted = !isCompleted
+        }
+    }
+    
 }
